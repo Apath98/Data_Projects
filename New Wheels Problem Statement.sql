@@ -17,7 +17,7 @@ the project in the SQL file
      	 #Ans 1	
 		select 
 			State, 
-            count(*) as Customer_Count 
+			count(*) as Customer_Count 
 		from customer_t
 		group by state
 	  	order by state asc;
@@ -29,8 +29,8 @@ the project in the SQL file
 
 	 #Ans 2	
 		with CTE1
-			as (select quarter_number,
-				round(avg(case 
+			as (select 	quarter_number,
+					round(avg(case 
 						when customer_feedback = 'Very Bad' 
 							then 1
 						when customer_feedback = 'Bad' 
@@ -46,7 +46,7 @@ the project in the SQL file
 				group by quarter_number)
 		select 
 			Quarter_Number, 
-            Avg_Ratings
+            		Avg_Ratings
 		from CTE1
 		group by quarter_number
 		order by quarter_number;
@@ -58,20 +58,20 @@ the project in the SQL file
      #Ans 3
 		with CTE1
 			as (select 
-					quarter_number, 
-                    count(customer_feedback) as Total_Feedback
+				quarter_number, 
+                    		count(customer_feedback) as Total_Feedback
 				from order_t
 				group by quarter_number
 				order by quarter_number
 				),
 			 CTE2 
 		    as (select 
-					customer_feedback,
-                    count(customer_feedback) as Feedback_Count, 
-                    quarter_number
-				from order_t
-				group by customer_feedback, quarter_number
-				order by quarter_number
+				customer_feedback,
+                    		count(customer_feedback) as Feedback_Count, 
+                    		quarter_number
+			from order_t
+			group by customer_feedback, quarter_number
+			order by quarter_number
 				)
 		select 
 			CTE1.quarter_number as Quarter_Number,
